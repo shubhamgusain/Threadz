@@ -1,0 +1,42 @@
+
+# Python Backend (Threadz-V1/backend/)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Environment Variables (root & backend)
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Antigravity specific (if needed)
+.antigravity/
+*.agcache
+
+# Note: frontend/.gitignore handles node_modules and frontend build files
