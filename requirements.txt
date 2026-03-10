@@ -1,0 +1,22 @@
+# Threadz Backend Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core Framework
+fastapi
+uvicorn[standard]
+
+# Database
+sqlalchemy
+aiosqlite
+
+# Data Validation & Authentication
+pydantic
+pydantic[email]
+python-multipart
+passlib[bcrypt]
+python-jose[cryptography]
+PyJWT
+email-validator
+
+# Image Processing
+pillow
