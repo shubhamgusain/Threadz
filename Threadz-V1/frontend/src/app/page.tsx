@@ -16,16 +16,16 @@ export default function Home() {
       <div className="absolute top-1/2 left-1/2 -ml-20 -mt-20 w-96 h-96 rounded-full bg-gradient-to-br from-amber-200/20 to-orange-300/20 blur-3xl pointer-events-none animate-pulse" style={{ animationDelay: '4s' }} />
 
       {/* Main content with enhanced styling */}
-      <div className="relative z-10 max-w-6xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-2xl">
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-2xl text-center">
           Create Your Own <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 animate-gradient">Fashion</span>
         </h1>
-        <p className="max-w-[42rem] leading-normal text-slate-700 sm:text-xl sm:leading-8 mb-10 drop-shadow-lg">
+        <p className="max-w-[42rem] leading-normal text-slate-700 sm:text-xl sm:leading-8 mb-10 drop-shadow-lg text-center">
           Upload your design, explore community creations, or describe your vision and let our AI bring it to life on premium garments.
         </p>
 
         {/* Enhanced buttons with better positioning */}
-        <div className="flex flex-col sm:flex-row gap-6 mb-16 w-full sm:w-auto relative z-20">
+        <div className="flex flex-col sm:flex-row gap-6 mb-16 items-center justify-center relative z-20">
           <Link href="/upload" className="group inline-flex h-14 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-8 text-sm font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:from-indigo-700 hover:to-purple-700">
             <span className="relative z-10">Start Designing Now</span>
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
