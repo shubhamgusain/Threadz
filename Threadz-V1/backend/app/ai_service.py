@@ -6,9 +6,9 @@ import uuid
 import asyncio
 from typing import Optional, Dict, Any
 from fastapi import HTTPException, status
-import stability_sdk
-from stability_sdk.interfaces.generation import generation
-from stability_sdk import client
+# import stability_sdk
+# from stability_sdk.interfaces.generation import generation
+# from stability_sdk import client
 import openai
 from PIL import Image
 import io

@@ -1,0 +1,64 @@
+{
+  "name": "threadz",
+  "version": "1.0.0",
+  "description": "Threadz - Complete T-shirt Design and E-commerce Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" || echo 'Run backend and frontend separately:' && echo 'npm run dev:backend' && echo 'npm run dev:frontend'",
+    "dev:backend": "cd Threadz-V1/backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "dev:frontend": "cd Threadz-V1/frontend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd Threadz-V1/frontend && npm run build",
+    "build:backend": "cd Threadz-V1/backend && echo 'Backend is ready for deployment'",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\" || echo 'Run backend and frontend separately:' && echo 'npm run start:backend' && echo 'npm run start:frontend'",
+    "start:backend": "cd Threadz-V1/backend && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000",
+    "start:frontend": "cd Threadz-V1/frontend && npm start",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd Threadz-V1/backend && python -m pytest",
+    "test:frontend": "cd Threadz-V1/frontend && npm test",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd Threadz-V1/backend && python -m flake8 app/ || true",
+    "lint:frontend": "cd Threadz-V1/frontend && npm run lint",
+    "setup": "npm run setup:env && npm run setup:deps",
+    "setup:env": "cp Threadz-V1/backend/.env.example .env && cp Threadz-V1/frontend/.env.example Threadz-V1/frontend/.env",
+    "setup:deps": "npm run setup:backend && npm run setup:frontend",
+    "setup:backend": "cd Threadz-V1/backend && pip install -r requirements.txt",
+    "setup:frontend": "cd Threadz-V1/frontend && npm install",
+    "docker:dev": "docker-compose up --build || echo 'Docker not found. Install Docker first: https://docs.docker.com/get-docker/'",
+    "docker:prod": "docker-compose -f docker-compose.prod.yml up --build || echo 'Docker not found. Install Docker first: https://docs.docker.com/get-docker/'",
+    "docker:down": "docker-compose down || echo 'Docker not found'",
+    "migrate": "cd Threadz-V1/backend && alembic upgrade head",
+    "migrate:generate": "cd Threadz-V1/backend && alembic revision --autogenerate -m",
+    "seed": "cd Threadz-V1/backend && python -m app.seed_data || echo 'Seed script not found'",
+    "clean": "npm run clean:frontend && npm run clean:backend",
+    "clean:frontend": "cd Threadz-V1/frontend && rm -rf .next node_modules",
+    "clean:backend": "cd Threadz-V1/backend && find . -type d -name __pycache__ -delete && find . -name '*.pyc' -delete"
+  },
+  "keywords": [
+    "e-commerce",
+    "t-shirt",
+    "design",
+    "fastapi",
+    "nextjs",
+    "react",
+    "python",
+    "typescript"
+  ],
+  "author": "Threadz Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/threadz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/threadz/issues"
+  },
+  "homepage": "https://github.com/your-username/threadz#readme"
+}

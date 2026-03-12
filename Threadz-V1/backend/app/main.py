@@ -16,6 +16,13 @@ from .security_hardening import security_middleware, security_hardening
 from .rate_limiter_redis import rate_limit_middleware, initialize_rate_limiter
 from .queue import start_queue_processor
 
+# Create FastAPI app
+app = FastAPI(
+    title=settings.APP_NAME,
+    version="1.0.0",
+    description="Threadz T-shirt Design and E-commerce Platform API"
+)
+
 # Initialize rate limiter
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter

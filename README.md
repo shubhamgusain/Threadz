@@ -1,230 +1,398 @@
-# Threadz - Custom Fashion Platform
+# Threadz - Complete T-shirt Design and E-commerce Platform
 
-A full-stack web application that allows users to create custom clothing designs through three pathways: uploading their own artwork, exploring community designs, or generating designs with AI.
+Threadz is a full-stack web application for designing, customizing, and selling t-shirts online. Built with modern technologies including FastAPI, Next.js, React, and PostgreSQL.
 
-## 🎨 Features
+## 🚀 Features
 
-- **Upload Designs**: Upload your own artwork and preview it on various garments
-- **Explore Community**: Browse and discover designs created by other users
-- **AI Generation**: Generate unique designs using AI (Premium feature)
-- **Product Catalog**: Browse different clothing types (t-shirts, hoodies, jackets)
-- **Shopping Cart**: Add custom designs to products and manage cart
-- **Order Management**: Complete checkout process with Razorpay integration
-- **User Authentication**: Secure JWT-based authentication system
+### Core Features
+- **T-shirt Designer**: Interactive 3D design tool with real-time preview
+- **E-commerce**: Complete shopping cart, checkout, and payment integration
+- **User Management**: Authentication, profiles, and order tracking
+- **AI-Powered Design**: AI-assisted design suggestions and generation
+- **Admin Dashboard**: Comprehensive admin panel for order and product management
+- **Analytics**: Detailed analytics and reporting system
+- **Email Notifications**: Automated email system for orders and updates
+- **Search & Filtering**: Advanced product search with filters
+- **Rate Limiting**: Built-in rate limiting and security features
+
+### Technical Features
+- **Microservices Architecture**: Scalable backend with Celery for background tasks
+- **Database Migrations**: Alembic for database version control
+- **Caching**: Redis for performance optimization
+- **File Storage**: Configurable local or cloud storage
+- **API Documentation**: Auto-generated OpenAPI/Swagger docs
+- **Testing**: Comprehensive test suite for both frontend and backend
+- **Docker Support**: Complete containerization with Docker Compose
+- **Conda Environment**: Managed Python environment with conda
+- **CI/CD Ready**: GitHub Actions workflow configuration
 
 ## 🏗️ Architecture
 
-### Backend (FastAPI + SQLAlchemy)
-- **Framework**: FastAPI with async support
-- **Database**: SQLite with SQLAlchemy ORM
-- **Authentication**: JWT tokens with bcrypt password hashing
-- **File Storage**: Local file system for design uploads
-- **API Documentation**: Auto-generated OpenAPI/Swagger docs
+```
+Threadz/
+├── Threadz-V1/
+│   ├── backend/                 # FastAPI backend application
+│   │   ├── app/                # Main application code
+│   │   ├── alembic/            # Database migrations
+│   │   ├── tests/              # Backend tests
+│   │   └── requirements.txt    # Python dependencies
+│   └── frontend/               # Next.js frontend application
+│       ├── src/                # React components and pages
+│       ├── public/             # Static assets
+│       └── package.json        # Node.js dependencies
+├── docker-compose.yml          # Development Docker setup
+├── environment.yml             # Conda environment configuration
+├── Makefile                    # Development commands
+├── setup.sh                    # Automated setup script
+└── README.md                   # This file
+```
 
-### Frontend (Next.js + TypeScript)
-- **Framework**: Next.js 16 with App Router
-- **UI**: Tailwind CSS with shadcn/ui components
+## 🛠️ Tech Stack
+
+### Backend
+- **Framework**: FastAPI
+- **Database**: PostgreSQL with SQLAlchemy ORM
+- **Cache**: Redis
+- **Task Queue**: Celery
+- **Authentication**: JWT with passlib
+- **File Processing**: Pillow
+- **Email**: FastAPI Mail
+- **API Documentation**: OpenAPI/Swagger
+- **Testing**: Pytest
+
+### Frontend
+- **Framework**: Next.js 16
+- **UI Library**: React 19
+- **Styling**: Tailwind CSS
+- **Components**: Radix UI + Shadcn
 - **State Management**: Redux Toolkit
-- **Canvas**: Fabric.js for design manipulation
-- **3D Visualization**: Three.js for product previews
+- **3D Graphics**: Three.js + React Three Fiber
+- **Canvas**: Fabric.js
+- **Icons**: Lucide React
+- **TypeScript**: Full TypeScript support
 
-## 📁 Project Structure
+### DevOps & Infrastructure
+- **Containerization**: Docker & Docker Compose
+- **Environment Management**: Conda
+- **Reverse Proxy**: Nginx
+- **Database Migrations**: Alembic
+- **Code Quality**: ESLint, Black, Pytest
+- **Version Control**: Git
 
-```
-Threadz-V1/
-├── backend/
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py              # FastAPI application entry point
-│   │   ├── database.py          # Database configuration
-│   │   ├── models.py            # SQLAlchemy models
-│   │   ├── auth.py              # Authentication endpoints
-│   │   ├── designs.py           # Design management endpoints
-│   │   ├── products.py          # Product catalog endpoints
-│   │   ├── orders.py            # Order management endpoints
-│   │   └── schemas*.py          # Pydantic schemas
-│   ├── requirements.txt         # Python dependencies
-│   ├── uploads/                 # File storage directory
-│   └── venv/                    # Virtual environment
-└── frontend/
-    ├── src/
-    │   ├── app/                 # Next.js app router pages
-    │   ├── components/          # React components
-    │   ├── store/               # Redux store configuration
-    │   └── lib/                 # Utility functions
-    ├── package.json             # Node.js dependencies
-    └── public/                  # Static assets
-```
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ and npm
-- Python 3.13+
-- Git
+- **Conda/Miniconda**: [Install Conda](https://docs.conda.io/en/latest/miniconda.html)
+- **Node.js 18+**: Included in conda environment
+- **Python 3.11+**: Included in conda environment
+- **Git**: For version control
 
-### Backend Setup
+### Automated Setup (Recommended)
 
-1. **Navigate to backend directory**
+1. **Clone the repository**
    ```bash
-   cd Threadz-V1/backend
+   git clone <your-repo-url>
+   cd Threadz
    ```
 
-2. **Create and activate virtual environment**
+2. **Run the setup script**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ./setup.sh
    ```
 
-3. **Install dependencies**
+3. **Activate the conda environment**
    ```bash
-   pip install -r requirements.txt
+   conda activate threadz-env
    ```
 
-4. **Start the server**
-   ```bash
-   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-   ```
-
-   The API will be available at `http://localhost:8000`
-   - API Documentation: `http://localhost:8000/docs`
-   - Health Check: `http://localhost:8000/health`
-
-### Frontend Setup
-
-1. **Navigate to frontend directory**
-   ```bash
-   cd Threadz-V1/frontend
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
+4. **Start the development servers**
    ```bash
    npm run dev
    ```
 
-   The application will be available at `http://localhost:3000`
+### Manual Setup
 
-## 📊 Database Schema
+1. **Create conda environment**
+   ```bash
+   conda env create -f environment.yml
+   conda activate threadz-env
+   ```
 
-### Users
-- User authentication and profile information
-- Addresses for shipping
+2. **Install frontend dependencies**
+   ```bash
+   cd Threadz-V1/frontend
+   npm install
+   cd ../..
+   ```
 
-### Designs
-- Uploaded, AI-generated, or community designs
-- Image storage and metadata
-- Moderation status
+3. **Setup environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
 
-### Products
-- Clothing catalog (t-shirts, hoodies, etc.)
-- Variants (colors, sizes)
-- Pricing information
+4. **Run database migrations**
+   ```bash
+   cd Threadz-V1/backend
+   alembic upgrade head
+   cd ../..
+   ```
 
-### Orders
-- Order management
-- Integration with payment system
-- Order items linking designs to products
+5. **Start development servers**
+   ```bash
+   npm run dev
+   ```
 
-## 🔐 Authentication
+## 🌐 Access Points
 
-The application uses JWT-based authentication:
-- **Registration**: Email/password with optional phone
-- **Login**: Returns JWT token with user info
-- **Protected Routes**: Design upload, order management require authentication
+After starting the development servers:
 
-## 🎯 API Endpoints
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
+- **Alternative API Docs**: http://localhost:8000/redoc
 
-### Authentication
-- `POST /api/v1/auth/register` - User registration
-- `POST /api/v1/auth/login` - User login
+## 🐳 Docker Development
 
-### Designs
-- `POST /api/v1/designs/upload` - Upload design (protected)
-- `GET /api/v1/designs/explore` - Browse public designs
-- `POST /api/v1/designs/ai-generate` - Generate AI design (protected)
+### Using Docker Compose
 
-### Products
-- `GET /api/v1/products/` - List all products
-- `GET /api/v1/products/{product_id}` - Get product details
+1. **Start all services**
+   ```bash
+   npm run docker:dev
+   # or
+   make docker-up
+   ```
 
-### Orders
-- `POST /api/v1/orders/` - Create order (protected)
-- `POST /api/v1/orders/verify` - Verify payment (protected)
-- `GET /api/v1/orders/my-orders` - Get user orders (protected)
+2. **Stop all services**
+   ```bash
+   npm run docker:down
+   # or
+   make docker-down
+   ```
 
-## 🛠️ Development
+### Services Included
+- **PostgreSQL**: Database server
+- **Redis**: Cache and message broker
+- **Backend**: FastAPI application
+- **Frontend**: Next.js application
+- **Celery Worker**: Background task processor
+- **Celery Beat**: Task scheduler
+- **Nginx**: Reverse proxy
+
+## 📝 Available Commands
+
+### Development Commands
+```bash
+# Start both frontend and backend
+npm run dev
+make dev
+
+# Start individual services
+npm run dev:backend
+npm run dev:frontend
+make dev-backend
+make dev-frontend
+```
+
+### Testing Commands
+```bash
+# Run all tests
+npm run test
+make test
+
+# Run specific tests
+npm run test:backend
+npm run test:frontend
+make test-backend
+make test-frontend
+```
+
+### Database Commands
+```bash
+# Run migrations
+npm run migrate
+make migrate
+
+# Generate new migration
+npm run migrate:generate
+make migrate-gen MSG="your migration message"
+
+# Seed database
+npm run seed
+make seed
+```
+
+### Code Quality Commands
+```bash
+# Run linting
+npm run lint
+make lint
+
+# Format code
+make format
+```
+
+### Docker Commands
+```bash
+# Development with Docker
+npm run docker:dev
+make docker-up
+
+# Production with Docker
+npm run docker:prod
+```
+
+## ⚙️ Configuration
 
 ### Environment Variables
-Create `.env` files in both backend and frontend directories:
 
-**Backend (.env)**
-```
-DATABASE_URL=sqlite+aiosqlite:///./sql_app.db
-SECRET_KEY=your-secret-key-here
+Key environment variables (see `.env.example`):
+
+```bash
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/threadz
+
+# Redis
+REDIS_URL=redis://localhost:6379
+
+# JWT Secret
+SECRET_KEY=your-super-secret-key
+
+# Email Configuration
+SMTP_HOST=smtp.gmail.com
+SMTP_USER=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+
+# Payment (Razorpay)
+RAZORPAY_KEY_ID=your-key-id
+RAZORPAY_KEY_SECRET=your-key-secret
+
+# AI Services
+OPENAI_API_KEY=your-openai-key
+STABILITY_API_KEY=your-stability-key
 ```
 
-**Frontend (.env.local)**
-```
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
+### Database Setup
 
-### Code Style
-- **Backend**: Python with async/await patterns
-- **Frontend**: TypeScript with strict typing
-- **UI Components**: shadcn/ui design system
-- **State Management**: Redux Toolkit with proper typing
+1. **PostgreSQL**: The setup script creates a PostgreSQL container
+2. **Migrations**: Alembic handles database schema changes
+3. **Seeding**: Optional seed data for development
 
 ## 🧪 Testing
 
 ### Backend Tests
 ```bash
-cd backend
-pytest
+cd Threadz-V1/backend
+python -m pytest -v --cov=app
 ```
 
 ### Frontend Tests
 ```bash
-cd frontend
+cd Threadz-V1/frontend
 npm test
 ```
 
-## 📦 Deployment
+### Test Coverage
+- Backend: Unit tests for API endpoints, services, and utilities
+- Frontend: Component tests and integration tests
+- E2E: End-to-end tests (planned)
 
-### Backend Production
-1. Use PostgreSQL instead of SQLite
-2. Set up proper file storage (AWS S3, etc.)
-3. Configure environment variables
-4. Use production ASGI server (Gunicorn + Uvicorn)
+## 📚 API Documentation
 
-### Frontend Production
-1. Build the application: `npm run build`
-2. Deploy to Vercel, Netlify, or similar platform
-3. Configure environment variables
+The backend provides automatic API documentation:
+
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+- **OpenAPI JSON**: http://localhost:8000/openapi.json
+
+## 🚀 Deployment
+
+### Production Deployment
+
+1. **Environment Setup**
+   ```bash
+   cp .env.example .env.production
+   # Configure production values
+   ```
+
+2. **Build and Deploy**
+   ```bash
+   npm run docker:prod
+   ```
+
+3. **SSL Configuration**
+   ```bash
+   # Generate SSL certificates
+   ./generate_ssl_cert.sh
+   ```
+
+### Deployment Options
+- **Docker**: Recommended for production
+- **Cloud**: AWS, Google Cloud, Azure
+- **VPS**: DigitalOcean, Linode, Vultr
+
+## 🔒 Security Features
+
+- **Rate Limiting**: Built-in rate limiting for API endpoints
+- **CORS**: Configurable CORS policies
+- **Authentication**: JWT-based authentication
+- **Input Validation**: Pydantic models for request validation
+- **SQL Injection Protection**: SQLAlchemy ORM
+- **XSS Protection**: Security headers and input sanitization
+- **HTTPS**: SSL/TLS support
+
+## 📈 Monitoring & Analytics
+
+- **Sentry Integration**: Error tracking and performance monitoring
+- **Application Analytics**: Custom analytics dashboard
+- **Performance Monitoring**: Request timing and database query monitoring
+- **Logging**: Structured logging with different levels
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
+3. **Commit** your changes: `git commit -m 'Add amazing feature'`
+4. **Push** to the branch: `git push origin feature/amazing-feature`
+5. **Open** a Pull Request
 
-## 📄 License
+### Development Guidelines
+- Follow PEP 8 for Python code
+- Use TypeScript for frontend development
+- Write tests for new features
+- Update documentation
+- Use meaningful commit messages
 
-This project is licensed under the MIT License.
+## � License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🆘 Support
 
 For support and questions:
-- Create an issue in the repository
-- Check the API documentation at `/docs`
-- Review the code comments for additional context
+
+- **Documentation**: Check this README and inline code comments
+- **Issues**: [GitHub Issues](https://github.com/your-username/threadz/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-username/threadz/discussions)
+
+## 🗺️ Roadmap
+
+### Upcoming Features
+- [ ] Mobile app (React Native)
+- [ ] Advanced AI design tools
+- [ ] Multi-vendor marketplace
+- [ ] Social features and sharing
+- [ ] Advanced analytics dashboard
+- [ ] Subscription models
+- [ ] International shipping integration
+
+### Technical Improvements
+- [ ] GraphQL API
+- [ ] Microservices architecture
+- [ ] Kubernetes deployment
+- [ ] Advanced caching strategies
+- [ ] Real-time features with WebSockets
 
 ---
 
-**Built with ❤️ using FastAPI, Next.js, and modern web technologies**
+**Built with ❤️ by the Threadz Team**

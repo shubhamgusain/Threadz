@@ -1,0 +1,48 @@
+name: threadz-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python version
+  - python=3.11
+  
+  # Core Backend Dependencies (using conda-available versions)
+  - fastapi
+  - uvicorn
+  - sqlalchemy
+  - psycopg2
+  - pydantic
+  - python-multipart
+  - passlib
+  - python-jose
+  - email-validator
+  - pillow
+  - python-dotenv
+  - redis-py
+  - celery
+  - httpx
+  - boto3
+  - jinja2
+  - pytest
+  - pytest-cov
+  - pytest-asyncio
+  - aiosqlite
+  
+  # Additional packages not available via conda (install with pip)
+  - pip
+  - pip:
+    - asyncpg
+    - alembic
+    - razorpay
+    - stability-sdk
+    - openai
+    - fastapi-mail
+    - slowapi
+    - aiosmtplib
+    - clamd
+    - sentry-sdk[fastapi]
+    
+  # Development tools
+  - git
+  - curl
+  - wget
