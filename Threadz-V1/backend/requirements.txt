@@ -26,5 +26,5 @@ slowapi==0.1.9
 pytest==8.3.2
 pytest-cov==6.0.0
 pytest-asyncio==0.24.0
-aiosmtplib
+aiosmtplib==3.0.2
 clamd==1.0.2

@@ -3,7 +3,8 @@ Configuration and Secrets Management for Threadz Application
 """
 import os
 from typing import Optional
-from pydantic import BaseSettings, validator
+from pydantic_settings import BaseSettings
+from pydantic import validator
 from dotenv import load_dotenv
 
 load_dotenv()
