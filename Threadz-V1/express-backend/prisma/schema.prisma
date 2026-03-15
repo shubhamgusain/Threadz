@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id             String    @id @default(uuid())
+  email               String    @unique
+  password_hash       String?
+  full_name           String
+  phone               String?
+  profile_picture_url String?
+  oauth_provider      String?
+  oauth_id            String?
+  email_verified      Boolean   @default(false)
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+  last_login          DateTime?
+
+  addresses           Address[]
+  designs             Design[]
+  orders              Order[]
+
+  @@map("users")
+}
+
+model Address {
+  address_id    String   @id @default(uuid())
+  user_id       String
+  address_type  String?  // home, work, other
+  full_name     String
+  phone         String
+  address_line1 String
+  address_line2 String?
+  city          String
+  state         String
+  pincode       String
+  is_default    Boolean  @default(false)
+  created_at    DateTime @default(now())
+
+  owner         User     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  orders        Order[]
+
+  @@map("addresses")
+}
+
+model Design {
+  design_id        String   @id @default(uuid())
+  user_id          String?
+  design_name      String?
+  design_source    String?  // upload, ai_generated, explore
+  image_url        String
+  thumbnail_url    String?
+  ai_prompt        String?
+  ai_style         String?
+  width_px         Int?
+  height_px        Int?
+  dpi              Int?
+  file_size_kb     Int?
+  is_public        Boolean  @default(false)
+  moderation_status String  @default("pending") // pending, approved, rejected
+  created_at       DateTime @default(now())
+  tags             String?
+
+  creator          User?    @relation(fields: [user_id], references: [user_id], onDelete: SetNull)
+  order_items      OrderItem[]
+
+  @@map("designs")
+}
+
+model Product {
+  product_id         String    @id @default(uuid())
+  name               String
+  description        String?
+  category           String?   // t-shirt, hoodie, jacket
+  base_price         Int       // In cents
+  fit_type           String?   // regular, oversized, slim
+  gsm                Int?
+  fabric_composition String?
+  is_active          Boolean   @default(true)
+  created_at         DateTime  @default(now())
+
+  variants           ProductVariant[]
+
+  @@map("products")
+}
+
+model ProductVariant {
+  variant_id       String   @id @default(uuid())
+  product_id       String
+  color_name       String?
+  color_hex        String?
+  size             String?  // XS, S, M, L, XL, XXL
+  stock_quantity   Int      @default(0)
+  price_adjustment Int      @default(0) // In cents
+  sku              String   @unique
+
+  product          Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  order_items      OrderItem[]
+
+  @@map("product_variants")
+}
+
+model Order {
+  order_id            String   @id @default(uuid())
+  user_id             String?
+  status              String   @default("Pending") // Pending, Paid, Shipped, Delivered, Cancelled
+  total_amount        Int      // In cents
+  razorpay_order_id   String?  @unique
+  shipping_address_id String?
+  created_at          DateTime @default(now())
+
+  buyer               User?    @relation(fields: [user_id], references: [user_id], onDelete: SetNull)
+  shipping_address    Address? @relation(fields: [shipping_address_id], references: [address_id], onDelete: SetNull)
+  items               OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  order_item_id String  @id @default(uuid())
+  order_id      String
+  variant_id    String?
+  design_id     String?
+  quantity      Int     @default(1)
+  unit_price    Int     // Base price + variant adjustment
+
+  order         Order            @relation(fields: [order_id], references: [order_id], onDelete: Cascade)
+  variant       ProductVariant?  @relation(fields: [variant_id], references: [variant_id], onDelete: SetNull)
+  design        Design?          @relation(fields: [design_id], references: [design_id], onDelete: SetNull)
+
+  @@map("order_items")
+}
